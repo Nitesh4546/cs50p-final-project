@@ -7,7 +7,7 @@ While working on this project, I sometimes encrypted my files and forgot to stor
 
 ## Video Demo:
 
-[Watch the video demo here](#) [(Add the link to your video demo)](https://www.youtube.com/watch?v=dwiXy3zxQvA)
+[Watch the video demo here](#)(https://www.youtube.com/watch?v=dwiXy3zxQvA)
 
 ## Description
 
