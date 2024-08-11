@@ -1,0 +1,3 @@
+cryptography
+send2trash
+pytest
