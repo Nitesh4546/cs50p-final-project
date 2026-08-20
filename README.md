@@ -1,81 +1,154 @@
-# File Security Project
+# 🔐 SecureShield: File Encryption & Obfuscation Suite
 
-This project provides a way to secure your files using encryption (via the `cryptography` library in Python). Encryption ensures that your files are protected from unauthorized access, a practice that dates back long before the advent of computers. Today, as we store more sensitive information on computers, securing this data is crucial.
+[![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=flat&logo=python&logoColor=white)](https://www.python.org/)
+[![CS50 Final Project](https://img.shields.io/badge/CS50-Final%20Project-red?style=flat)](https://cs50.harvard.edu/)
+[![Cryptography](https://img.shields.io/badge/Security-Cryptography%20Fernet-blue?style=flat&logo=letsencrypt&logoColor=white)](https://cryptography.io/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
-While working on this project, I sometimes encrypted my files and forgot to store the encryption keys `:|`(hopefully, you won't do that `:)`).
+An end-to-end symmetric encryption and file-name obfuscation tool built in Python. **SecureShield** locks down entire directories by encrypting file contents and masking their names/extensions, preventing unauthorized inspection and tampering.
 
+---
 
-## Video Demo:
+## 📺 Video Demo
 
-[Watch the video demo here](#)(https://www.youtube.com/watch?v=dwiXy3zxQvA)
+[![Watch the Video Demo](https://img.shields.io/badge/YouTube-Watch%20Demo%20Video-FF0000?style=for-the-badge&logo=youtube&logoColor=white)](https://www.youtube.com/watch?v=dwiXy3zxQvA)
 
-## Description
+---
 
-The project includes files that secure your files (stored in a folder) using encryption.
+## ✨ Features
 
-## Table of Contents
+- **Robust Symmetric Encryption:** Uses the industry-standard `cryptography` library (AES-based Fernet) to encrypt file data.
+- **File Metadata & Type Obfuscation:** Masks original file names and extensions with randomized placeholders so file types cannot be identified by sight.
+- **Automated Key & Metadata Management:** Automatically generates and stores encryption keys and restoration mappings in a dedicated `Data/` directory.
+- **One-Click Reversible Decryption:** Restores original filenames, formats, and contents seamlessly.
+- **Safe File Operations:** Uses `send2trash` for non-destructive local cleanup.
+- **Automated Unit Testing:** Includes test coverage for core security and validation routines.
 
-1. [Description and Explanation of Files](#1-description-and-explanation-of-files)
-2. [Libraries Used](#2-libraries-used)
-3. [Steps to Use](#3-steps-to-use)
+---
 
-## 1. Description and Explanation of Files
+## 📁 Repository Structure
 
-The project consists of four Python files and a test folder with images. Here's an explanation of each file:
+```text
+CS50_Project/
+│
+├── Data/                 # Stores generated keys and restoration maps (keep safe!)
+│   ├── Encrypt_dir.txt   # Target folder path registry
+│   ├── names.txt         # Obfuscated-to-original filename mapping
+│   └── TheKey.key        # Generated Fernet symmetric encryption key
+│
+├── Test/                 # Sample files and test assets
+│
+├── securityfun.py        # Core utility library (validation, cipher routines)
+├── main_en.py            # CLI entry point for folder encryption & obfuscation
+├── main_de.py            # CLI entry point for folder decryption & restoration
+├── test_security.py      # Unit test suite for validation & crypto helpers
+├── requirements.txt      # Project dependencies
+└── README.md             # Project documentation
 
-### i) `securityfun.py`
+```
 
-This file is the core of the project. It contains functions for validating the path, encrypting files, decrypting files, and more. Without this file, the other files are useless.
+---
 
-### ii) `main_en.py`
+## 🛠️ Module Breakdown
 
-This file takes the path of the folder containing the files you want to encrypt (avoid having any subfolders along with the files). After encrypting, it saves `Encrypt_dir.txt`, `names.txt`, and `TheKey.key` in the `Data` folder. Handle these files with care—any changes (like renaming or editing the content) can cause you to lose your data. These files will be used to decrypt the files in the future. You can store these files in another location. This file also assigns fake names to the files, making them unpredictable in terms of file type, even to you.
+| File | Purpose |
+| --- | --- |
+| `securityfun.py` | **Core Engine:** Contains fundamental logic for path validation, key creation, file-stream encryption/decryption, and directory manipulation. |
+| `main_en.py` | **Encryption Pipeline:** Prompts for target folder, generates `TheKey.key`, scrambles file names, encrypts file payloads, and saves mapping metadata. |
+| `main_de.py` | **Decryption Pipeline:** Reads key and mapping files from `Data/`, decrypts contents, and recovers original filenames and file types. |
+| `test_security.py` | **Unit Tests:** Validates core functions to ensure reliability across edge cases and path validation. |
 
-### iii) `main_de.py`
+---
 
-This file checks if `Encrypt_dir.txt`, `names.txt`, and `TheKey.key` are in the `Data` folder. Using these files, it decrypts the files, restores their original names and data types, and makes them readable.
+## 🚀 Getting Started
 
-### iv) `test_security.py`
+### Prerequisites
 
-This test file was created to clear the conditions for the final project. It tests four functions. The `Test` folder with images was created to test the functions. The images are from Duolingo, just to show off my scores.
+* [Python 3.8+](https://www.python.org/downloads/)
+* `pip` package manager
 
-## 2. Libraries Used
+### 1. Clone & Install Dependencies
 
-The project uses the following libraries:
-
-- `cryptography`: For encryption and decryption.
-- `sys`: To exit the code when an error occurs.
-- `os`: To find files and check the validity of the path.
-- `send2trash`: To send files to the recycle bin.
-
-## 3. Steps to Use
-
-### First:
-
-Open the folder `CS50_Project` and in the path bar, type:
+Clone the repository and install required third-party packages:
 
 ```bash
+git clone [https://github.com/Nitesh4546/File-Security-Project.git](https://github.com/Nitesh4546/File-Security-Project.git)
+cd CS50_Project
 pip install -r requirements.txt
+
 ```
-### Second
-Open the CS50_Project folder in cmd and run: 
+
+*(Or install packages manually):*
+
+```bash
+pip install cryptography send2trash pytest
+
 ```
+
+---
+
+## 📖 Usage Guide
+
+### 🔒 Encrypting a Folder
+
+1. Run the encryption script:
+```bash
 python main_en.py
-```
-Enter the path of the folder without quotes. Example: C:\User\name\folderpath
 
-### Third
-To decrypt the files, move Encrypt_dir.txt, names.txt, and TheKey.key back to the Data folder. Open CS50_Project folder in command prompt and type:
 ```
+
+
+2. When prompted, enter the absolute path to your target directory (without quotes):
+```text
+Enter folder path: C:\Users\Username\Documents\ConfidentialFiles
+
+```
+
+
+3. The script will:
+* Encrypt each file in-place.
+* Assign fake names/extensions to obscure file types.
+* Generate `TheKey.key`, `names.txt`, and `Encrypt_dir.txt` inside the `Data/` folder.
+
+
+
+> ⚠️ **IMPORTANT WARNING:**
+> Store the contents of the `Data/` directory in a safe, secure backup location. **If you lose `TheKey.key` or edit `names.txt`, your encrypted data cannot be recovered.**
+
+---
+
+### 🔓 Decrypting a Folder
+
+1. Ensure `TheKey.key`, `names.txt`, and `Encrypt_dir.txt` are placed in the `Data/` folder.
+2. Run the decryption script:
+```bash
 python main_de.py
+
 ```
-Run it to decrypt the files.
 
-Watch the video for a deeper understanding of the instructions.
 
-# Requirements
-1. Python compiler
-2. Must excuete the step 3 of installing python lib
-# Contact
-1. Email:- niteshnunia91@gmail.com
-2. GitHub:-Nitesh4546
+3. The script reads the saved directory path, decrypts all payloads, and restores original file names and extensions.
+
+---
+
+## 🧪 Running Tests
+
+To verify that all cryptographic and validation routines are working properly:
+
+```bash
+pytest test_security.py
+
+```
+
+---
+
+## 📦 Dependencies
+
+* [`cryptography`](https://pypi.org/project/cryptography/) – Symmetric encryption implementation (`Fernet`)
+* [`send2trash`](https://pypi.org/project/Send2Trash/) – Safe recycle-bin file deletion
+* [`pytest`](https://pypi.org/project/pytest/) – Testing framework
+
+---
+
+## 👤 Author
+[@Nitesh4546](https://github.com/Nitesh4546)
